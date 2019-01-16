@@ -19,11 +19,11 @@ const server = Hapi.server({
 // Add the route
 server.route({
     method:'GET',
-    path:'/',
-    handler:function(request,h) {
-
-        return'hello world';
+    path:'/add',
+    handler: function (request, reply) {
+        return server.method.task.todoAdd(server, request).then(reply);
     }
+     
 });
 
 // Start the server
@@ -34,8 +34,8 @@ const start = async function () {
                 plugin: require("hapi-mongodb"),
                 options: dbOpts
             },
-            require("./hapi-todo-task"),
-            require("./hapi-datasource-take")
+            require("./hapi-datasource-take"),
+            require("./hapi-todo-task")
         ]);
         await server.start();
     } catch (err) {

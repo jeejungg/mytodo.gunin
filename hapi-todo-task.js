@@ -1,38 +1,35 @@
-expect.plugin = {
+exports.plugin = {
     name: 'hapi-todo-task',
     version: '1.0.0',
     register: async function (server, options) {
         server.method({
-            name: "todo.task.Add",
-            method: AddTodo,
-        });
-        server.method({
-            name: "todo.task.Update",
-            method: UpdateTodo,
-        });
-        server.method({
-            name: "todo.task.Remove",
-            method: RemoveTodo,
-        });
-        server.method({
-            name: "todo.task.List",
-            method: ListTodo,
-        });
-
-    }
+            name : 'task.todoAdd',
+            method : todoAdd
+        })
+    }      
 };
 
-const AddTodo = (server, requeste) => {
-    const body = {
-        name: request.payload.name,
-        date: request.payload.date,
-        time: request.payload.time
+let todoAdd = (server, request) => {
+    let body = {
+        name : request.payload.name,
+        date : request.payload.date
     }
     return new Promise((resolve, reject) => {
-        server.methods.(request.mongo.db, body)
-            .then((res) => {
-            } 
-            
-    });
+        server.method.datasource.taskInsert(body).then((res) => {
+            if (res.result.ok == 1){
+                resolve({
+                    status: 200,
+                    message: "เพิ่มได้",
+                    data: res.ops[0]
+                });
+            }else {
+                reject({
+                    status: 500,
+                    message: 'ไม่ได้',
+                    data: null
+                })
+            }
+        })
 
+    });
 }
