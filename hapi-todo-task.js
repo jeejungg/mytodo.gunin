@@ -99,7 +99,7 @@ let todoDelete = (server, request) => {
         const ObjectID = request.mongo.ObjectID;
         server.methods.datasource.taskDelete(request.mongo.db, new ObjectID(request.params.id))
         .then((res) => {
-            if (res.result.ok == 1){
+            if (res.result.n == 1){
                 resolve({
                     status:200,
                     message: "ลบได้แล้ว",
@@ -108,7 +108,7 @@ let todoDelete = (server, request) => {
             } else {
                 reject({
                     status: 500,
-                    message: "ลบไม่ได้",
+                    message: "ลบไม่ได้ไม่มี ID นี้",
                     data: null
                 });
             }
