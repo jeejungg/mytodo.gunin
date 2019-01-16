@@ -19,9 +19,9 @@ const server = Hapi.server({
 // Add the route
 server.route({
     method:'POST',
-    path:'/add',
-    handler: function (request, reply) {
-        return server.method.task.todoAdd(server, request).then(reply);
+    path:'/task/add',
+    handler: (request, reply) => {
+        return server.methods.task.todoAdd(server, request).then(reply);
     }
      
 });

@@ -9,7 +9,7 @@ exports.plugin = {
 }
 }
 
-var taskInsert = (body) => {
-    let db = Request.mongo.db;
+var taskInsert = (request,body) => {
+    let db = request.mongo.db;
     return db.collection('ingunzamak').insert(body);
 }

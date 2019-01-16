@@ -15,7 +15,7 @@ let todoAdd = (server, request) => {
         date : request.payload.date
     }
     return new Promise((resolve, reject) => {
-        server.method.datasource.taskInsert(body).then((res) => {
+        server.methods.datasource.taskInsert(request,body).then((res) => {
             if (res.result.ok == 1){
                 resolve({
                     status: 200,
