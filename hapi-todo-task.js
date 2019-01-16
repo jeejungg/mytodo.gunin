@@ -23,8 +23,11 @@ exports.plugin = {
 
 let todoAdd = (server, request) => {
     let body = {
+        task: request.payload.task,
+        description: request.payload.description,
+        status: request.payload.status,
+        expire: request.payload.expire,
         name: request.payload.name,
-        date: request.payload.date
     }
     return new Promise((resolve, reject) => {
         server.methods.datasource.taskInsert(request.mongo.db, body).then((res) => {
@@ -58,8 +61,11 @@ let todoQuery = (server, request) => {
 
 let todoUpdate = (server, request) => {
     let body = {
+        task: request.payload.task,
+        description: request.payload.description,
+        status: request.payload.status,
+        expire: request.payload.expire,
         name: request.payload.name,
-        date: request.payload.date
     }
     return new Promise ((resolve, reject) => {
         const ObjectID = request.mongo.ObjectID;
@@ -91,7 +97,7 @@ let todoUpdate = (server, request) => {
 let todoDelete = (server, request) => {
     return new Promise ((resolve, reject) => {
         const ObjectID = request.mongo.ObjectID;
-        server.methods.datasource.taskUpdate(request.mongo.db, new ObjectID(request.params.id))
+        server.methods.datasource.taskDelete(request.mongo.db, new ObjectID(request.params.id))
         .then((res) => {
             if (res.result.ok == 1){
                 resolve({

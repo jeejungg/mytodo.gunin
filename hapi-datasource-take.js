@@ -13,6 +13,10 @@ exports.plugin = {
         server.method({
             name : 'datasource.taskUpdate',
             method : taskUpdate
+        }),
+        server.method({
+            name : 'datasource.taskDelete',
+            method : taskDelete
         })
 }
 }
@@ -39,6 +43,6 @@ var taskUpdate = (db, id, body) => {
     return db.collection('ingunzamak').update({ _id: id}, body);
 }
 
-var taskUpdate = (db, id) => {
+var taskDelete = (db, id) => {
     return db.collection('ingunzamak').deleteOne({ _id: id});
 }
