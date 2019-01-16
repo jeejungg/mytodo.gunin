@@ -22,10 +22,16 @@ server.route({
     path:'/task/add',
     handler: (request, reply) => {
         return server.methods.task.todoAdd(server, request).then(reply);
-    }
-     
+    }  
 });
 
+server.route({
+    method:'GET',
+    path:'/task/list',
+    handler: (request, reply) => {
+        return server.methods.task.todoQuery(server, request).then(reply);
+    }  
+});
 // Start the server
 const start = async function () {
     try {
