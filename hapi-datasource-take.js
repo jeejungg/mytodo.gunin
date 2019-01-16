@@ -9,7 +9,7 @@ exports.plugin = {
         server.method({
             name : 'datasource.taskQuery',
             method : taskQuery
-        })
+        }),
         server.method({
             name : 'datasource.taskUpdate',
             method : taskUpdate
@@ -35,8 +35,6 @@ var taskQuery = (db) => {
     })
 }
 
-var taskUpdate = (db) => {
-    return new Promise (resolve, reject) => {
-        
-    }
+var taskUpdate = (db, id, body) => {
+    return db.collection('ingunzamak').update({ _id: id}, body);
 }

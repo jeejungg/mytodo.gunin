@@ -32,6 +32,14 @@ server.route({
         return server.methods.task.todoQuery(server, request).then(reply);
     }  
 });
+
+server.route({
+    method:'PUT',
+    path:'/task/update/{id}',
+    handler: (request, reply) => {
+        return server.methods.task.todoUpdate(server, request).then(reply);
+    }  
+});
 // Start the server
 const start = async function () {
     try {
