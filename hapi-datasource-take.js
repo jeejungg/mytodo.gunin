@@ -11,5 +11,5 @@ exports.plugin = {
 
 var taskInsert = (body) => {
     let db = Request.mongo.db;
-    return db.collection('product').find();
+    return db.collection('ingunzamak').insert(body);
 }
