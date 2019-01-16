@@ -13,6 +13,10 @@ exports.plugin = {
             server.method({
                 name: 'task.todoUpdate',
                 method: todoUpdate
+            }),
+            server.method({
+                name: 'task.todoDelete',
+                method: todoDelete
             })
     }
 };
@@ -82,5 +86,33 @@ let todoUpdate = (server, request) => {
             });
         });
     });
+}
 
+let todoDelete = (server, request) => {
+    return new Promise ((resolve, reject) => {
+        const ObjectID = request.mongo.ObjectID;
+        server.methods.datasource.taskUpdate(request.mongo.db, new ObjectID(request.params.id))
+        .then((res) => {
+            if (res.result.ok == 1){
+                resolve({
+                    status:200,
+                    message: "ลบได้แล้ว",
+                    data: (res.ops && res.ops.length > 0)  ? res.ops[0] : {}
+                });
+            } else {
+                reject({
+                    status: 500,
+                    message: "ลบไม่ได้",
+                    data: null
+                });
+            }
+        }).catch ((error)=>{
+            reject({
+                status: 500,
+                message: "ลบไม่ได้",
+                data: null
+            });
+        });
+    });
+    
 }

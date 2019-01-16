@@ -40,6 +40,15 @@ server.route({
         return server.methods.task.todoUpdate(server, request).then(reply);
     }  
 });
+
+server.route({
+    method:'DELETE',
+    path:'/task/delete/{id}',
+    handler: (request, reply) => {
+        return server.methods.task.todoDelete(server, request).then(reply);
+    }  
+});
+
 // Start the server
 const start = async function () {
     try {
