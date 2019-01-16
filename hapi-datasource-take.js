@@ -10,6 +10,10 @@ exports.plugin = {
             name : 'datasource.taskQuery',
             method : taskQuery
         })
+        server.method({
+            name : 'datasource.taskUpdate',
+            method : taskUpdate
+        })
 }
 }
 
@@ -29,4 +33,10 @@ var taskQuery = (db) => {
             }
         });
     })
+}
+
+var taskUpdate = (db) => {
+    return new Promise (resolve, reject) => {
+        
+    }
 }
